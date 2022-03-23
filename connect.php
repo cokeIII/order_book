@@ -1,7 +1,7 @@
 <?php
 $servername = "localhost";
 $username = "root";
-$password = "";
+$password = "chontech2020!";
 $database = "order_book";
 
 // Create connection
