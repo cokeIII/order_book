@@ -5,6 +5,7 @@ require_once 'vendor/mpdf/mpdf/mpdf.php';
 require_once "connect.php";
 //custom font
 // session_start();
+header('Content-Type: text/html; charset=UTF-8');
 error_reporting(error_reporting() & ~E_NOTICE);
 error_reporting(E_ERROR | E_PARSE);
 $terms = $_POST["term"];
