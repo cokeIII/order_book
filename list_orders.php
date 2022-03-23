@@ -36,7 +36,7 @@
             <div class="card-body">
                 <div class="row">
                     <div class="col-md-6">
-                        <h5>รายการหนังสือที่เลือก</h5>
+                        <h5>รายการจัดซื้อ</h5>
                     </div>
                     <div class="col-md-6">
                         <a href="report3.php" target="_blank" class="btn btn-primary float-right-c">สมอ.2</a>
