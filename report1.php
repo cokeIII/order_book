@@ -193,8 +193,9 @@ where o.people_id = '$people_ids' and o.status = '0' and o.term = '$terms' and o
             <tr class="no-bor">
                 <td class="no-bor" colspan="3">(.....................................................)</td>
             </tr>
-        </table>
+        </table> 
     </div>
+    <pagebreak></pagebreak>
 <?php
 
 }
