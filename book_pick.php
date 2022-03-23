@@ -35,13 +35,15 @@
     b.price,
     o.total,
     o.student_group_id,
-    sg.student_group_short_name
+    sg.group_name,
+    sg.level,
+    sg.major_name
     from order_books o
     inner join book b on b.author_id = o.author_id and b.pub_id = o.pub_id and b.subject_id = o.subject_id_book
     inner join people p on p.people_id = o.people_id
     inner join author a on a.author_id = o.author_id
     inner join publisher pu on pu.pub_id  = o.pub_id
-    inner join student_group sg on sg.student_group_id = o.student_group_id
+    inner join group_std_real sg on sg.group_id = o.student_group_id
     where o.people_id = '$people_id' and o.status = '0' and term = '$term' ";
     $res = mysqli_query($conn, $sql);
     ?>
@@ -76,7 +78,7 @@
                                 <th><?php echo $row["author_name"]; ?></th>
                                 <th><?php echo $row["pub_name"]; ?></th>
                                 <th><?php echo $row["price"]; ?></th>
-                                <th><?php echo (empty($row["student_group_id"]) ? $row["student_group_short_name"] : $row["student_group_short_name"]); ?></th>
+                                <th><?php echo $row["level"].'/'.$row["group_name"].' '.$row["major_name"];?></th>
                                 <th><?php echo $row["total"]; ?></th>
                                 <th>
                                     <button subject_id_book="<?php echo $row["subject_id_book"]; ?>" author_id="<?php echo $row["author_id"]; ?>" pub_id="<?php echo $row["pub_id"]; ?>" people_id="<?php echo $people_id; ?>" student_group_id="<?php echo $row["student_group_id"]; ?>" class="btn btn-danger btnDel">
@@ -90,13 +92,8 @@
 
                 <div class="w-100">
                     <button class="btn btn-primary float-right-c mt-3" id="btnConfirm" target="_blank">
-                        <!-- <div class="row">
-                                <div class="col-md-6"> -->
                         <img src="img/box.png" width="30" height="30">
-                        <!-- </div>
-                                <div class="col-md-6"> -->
                         ยืนยันรายการ
-                        <!-- </div> -->
                     </button>
                     <a href="form_order.php" class="btn btn-success float-left-c mt-3">
                         <img src="img/shopping-bag.png" width="30" height="30">

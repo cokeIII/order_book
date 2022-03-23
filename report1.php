@@ -80,7 +80,6 @@ inner join book b on b.author_id = o.author_id and b.pub_id = o.pub_id and b.sub
 inner join people p on p.people_id = o.people_id
 inner join author a on a.author_id = o.author_id
 inner join publisher pu on pu.pub_id  = o.pub_id
-inner join student_group sg on sg.student_group_id = o.student_group_id
 where o.people_id = '$people_ids' and o.status = '0' and o.term = '$terms' and o.subject_id = '$subject_id' and o.subject_name = '$subject_name' group by o.subject_id_book,b.name_book limit 3";
     $resData = mysqli_query($conn, $sqlData);
     $resData2 = mysqli_query($conn, $sqlData);

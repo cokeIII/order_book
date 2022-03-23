@@ -51,8 +51,9 @@ if ($res) {
 function count_group_std($group_id)
 {
     global $conn;
-    $sql = "select count(student_id) as countStd from student where status = '0' and  group_id = '$group_id'";
+    // $sql = "select count(student_id) as countStd from student where status = '0' and  group_id = '$group_id'";
+    $sql = "select qty_std from group_std_real where group_id = '$group_id'";
     $res = mysqli_query($conn, $sql);
     $row = mysqli_fetch_array($res);
-    return $row["countStd"];
+    return $row["qty_std"];
 }
