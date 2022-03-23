@@ -1,5 +1,6 @@
 <?php
 require_once "connect.php";
+header('Content-Type: text/html; charset=UTF-8');
 
 // $subject_id = $_POST["subject_id"];
 // $people_id = $_POST["people_id"];
