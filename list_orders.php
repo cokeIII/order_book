@@ -39,7 +39,7 @@
                         <h5>รายการหนังสือที่เลือก</h5>
                     </div>
                     <div class="col-md-6">
-                        <a href="report3.php" class="btn btn-primary float-right-c">สมอ.2</a>
+                        <a href="report3.php" target="_blank" class="btn btn-primary float-right-c">สมอ.2</a>
                     </div>
                 </div>
                 <hr>

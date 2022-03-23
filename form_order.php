@@ -91,7 +91,7 @@
                                 <label>วิชา</label>
                             </div>
                             <select class="form-control" name="subject" id="subject" required>
-                                <option value="">-- เลือวิชา --</option>
+                                <option value="">-- เลือกวิชา --</option>
                             </select>
                         </div>
                         <div class="col-md-3 mt-1">
