@@ -31,7 +31,7 @@
     where o.people_id = '$people_id' and o.status = '1' group by o.subject_id,subject_name";
     $res = mysqli_query($conn, $sql);
     ?>
-    <div class="container h-100 mt-5">
+    <div class="container h-100 mt-5 mb-3">
         <div class="card shadow">
             <div class="card-body">
                 <div class="row">

@@ -45,7 +45,7 @@
     where o.people_id = '$people_id' and o.status = '0' and term = '$term' ";
     $res = mysqli_query($conn, $sql);
     ?>
-    <div class="container h-100 mt-5">
+    <div class="container h-100 mt-5 mb-3">
         <div class="card shadow">
             <div class="card-body">
                 <h5>รายการหนังสือที่เลือก</h5>

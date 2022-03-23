@@ -1,4 +1,5 @@
 <?php
+
 require_once 'vendor/autoload.php';
 require_once 'vendor/mpdf/mpdf/mpdf.php';
 require_once "connect.php";
@@ -9,6 +10,7 @@ error_reporting(error_reporting() & ~E_NOTICE);
 error_reporting(E_ERROR | E_PARSE);
 session_start();
 $mpdf = new mPDF();
+ob_start();
 // $mpdf = new \Mpdf\Mpdf();
 ?>
 
@@ -25,6 +27,7 @@ $mpdf = new mPDF();
 
     .text-center {
         text-align: center;
+        font-family: "thsarabun";
     }
 
     .table,
@@ -35,6 +38,7 @@ $mpdf = new mPDF();
         border-collapse: collapse;
         margin-left: auto;
         margin-right: auto;
+        font-family: "thsarabun";
     }
 
     .table-nobor {
@@ -42,6 +46,7 @@ $mpdf = new mPDF();
         border-collapse: collapse;
         margin-left: auto;
         margin-right: auto;
+        font-family: "thsarabun";
     }
 
     .no-bor {
@@ -116,21 +121,24 @@ $res = mysqli_query($conn, $sql);
             <tr>
                 <td><?php echo $i++; ?></td>
                 <td><?php echo $row["subject_id_book"]; ?></td>
-                <td><?php echo $row["name_book"]; ?></td>
-                <td><?php echo $row["author_name"]; ?></td>
-                <td><?php echo $row["pub_name"]; ?></td>
+                <td class="text-left"><?php echo $row["name_book"]; ?></td>
+                <td class="text-left"><?php echo $row["author_name"]; ?></td>
+                <td class="text-left"><?php echo $row["pub_name"]; ?></td>
                 <td><?php echo $row["price"]; ?></td>
                 <td><?php echo $row["sumTotal"]; ?></td>
-                <td><?php echo $row["people_name"] . " " . $row["people_surname"]; ?></td>
+                <td class="text-left"><?php echo $row["people_name"] . " " . $row["people_surname"]; ?></td>
                 <td></td>
                 <td></td>
             </tr>
-        <?php
-            $html .= ob_get_contents();
-            ob_clean();
-        } ?>
+            <?php
+            if (($i - 1) % 9 == 0) {
+            ?>
 
+        <?php
+            }
+        } ?>
     </table>
+
     <br>
     <table class="content-text-bottom text-center" width="100%">
         <tr class="no-bor">
@@ -174,9 +182,12 @@ $res = mysqli_query($conn, $sql);
 </div>
 <?php
 $mpdf->SetHTMLHeader("<div class='content-text text-right'>แบบฟอร์ม สมอ.2</div>");
-$html2 = ob_get_contents();
-ob_clean();
-$mpdf->WriteHTML($html . $html2);
-$mpdf->Output();
-
+$html = ob_get_contents();
+// $mpdf->AddPage('L');
+$mpdf->WriteHTML($html);
+$taget = "pdf/report3.pdf";
+$mpdf->Output($taget);
+ob_end_flush();
+echo "<script>window.location.href='$taget';</script>";
+exit;
 ?>
