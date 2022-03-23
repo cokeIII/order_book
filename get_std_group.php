@@ -1,0 +1,15 @@
+<?php
+require_once "connect.php";
+
+// $subject_id = $_POST["subject_id"];
+// $people_id = $_POST["people_id"];
+// $term = $_POST["term"];
+$sql = "select * from student_group order by student_group_id desc";
+$res = mysqli_query($conn, $sql);
+$opt = '<option value=""> -- เลือกกลุ่มเรียน --</option>';
+while ($row = mysqli_fetch_array($res)) {
+    if (substr($row['student_group_id'], 2, 1) == 2) {
+        $opt .= '<option value="' . $row["student_group_id"].'"> (' . $row["student_group_id"] . ') ' . $row["student_group_short_name"].'</option>';
+    }
+}
+echo $opt;
