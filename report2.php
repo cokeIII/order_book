@@ -1,30 +1,17 @@
 <?php
-header("Content-type:application/pdf");
-require_once __DIR__ . '/vendor/autoload.php';
+// header("Content-type:application/pdf");
+require_once 'vendor/autoload.php';
+require_once 'vendor/mpdf/mpdf/mpdf.php';
 require_once "connect.php";
 //custom font
-// session_start();
-$defaultConfig = (new Mpdf\Config\ConfigVariables())->getDefaults();
-$fontDirs = $defaultConfig['fontDir'];
-
+session_start();
+error_reporting(error_reporting() & ~E_NOTICE);
+error_reporting(E_ERROR | E_PARSE);
 $usernames = $_POST["username"];
 $people_ids = $_POST["people_id"];
-$defaultFontConfig = (new Mpdf\Config\FontVariables())->getDefaults();
-$fontData = $defaultFontConfig['fontdata'];
-$mpdf = new \Mpdf\Mpdf([
-    'fontDir' => array_merge($fontDirs, [
-        __DIR__ . '/fonts',
-    ]),
-    'fontdata' => $fontData + [
-        'thsarabun' => [
-            'R' => 'THSarabun.ttf',
-            //'I' => 'THSarabunNew Italic.ttf',
-            'B' => 'THSarabun Bold.ttf',
-        ]
-    ],
-    'default_font' => 'thsarabun',
-    'format' => 'A4-L'
-]);
+session_start();
+$mpdf = new mPDF();
+ob_start();
 ?>
 
 <style>
@@ -32,7 +19,8 @@ $mpdf = new \Mpdf\Mpdf([
         font-size: 20px;
     }
 
-    div {
+    div,
+    table {
         font-family: "thsarabun";
     }
 
@@ -173,13 +161,11 @@ $rowData = mysqli_fetch_array($resData);
             <td>$i</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
             </tr>";
     }
-    $html = ob_get_contents();
-    ob_clean();
     ?>
 </table>
 <div class="content-text">
     <p><strong><u>หมายเหตุ</u></strong> ลำดับที่เลือกอันดับแรกเป็นหนังสือที่มีความต้องการจัดซื้อ</p>
-    <p>กรณีผู้สอนเสนอรายชื่อหนังสือน้อยกว่า 3 เล่ม เนื่องจาก............................................................................................................................................................................................................</p>
+    <p>กรณีผู้สอนเสนอรายชื่อหนังสือน้อยกว่า 3 เล่ม เนื่องจาก.....................................................................................................................................................................................................................</p>
     <table class="table-nobor content-text w-100 text-center">
         <tr class="no-bor">
             <td class="no-bor"><br>ลงชื่อ.......................................................ครูผู้สอน</td>
@@ -201,21 +187,14 @@ $rowData = mysqli_fetch_array($resData);
     </table>
 </div>
 <?php
-$html2 = ob_get_contents();
-$mpdf->AddPage("L");
-$mpdf->WriteHTML($html . $html2);
-ob_clean();
+$html = ob_get_contents();
+$mpdf->AddPage('L');
+$mpdf->WriteHTML($html);
+$taget = "pdf/report2.pdf";
 ?>
 <?php
-$mpdf->Output();
-
-function count_group_std($group_id)
-{
-    global $conn;
-    $sql = "select count(student_id) as countStd from student where status = '0' and  group_id = '$group_id'";
-    $res = mysqli_query($conn, $sql);
-    $row = mysqli_fetch_array($res);
-    return $row["countStd"];
-}
-
+$mpdf->Output($taget);
+ob_end_flush();
+echo "<script>window.location.href='$taget';</script>";
+exit;
 ?>

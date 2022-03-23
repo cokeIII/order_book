@@ -1,43 +1,33 @@
 <?php
 // header("Content-type:application/pdf");
-require_once __DIR__ . '/vendor/autoload.php';
+require_once 'vendor/autoload.php';
+require_once 'vendor/mpdf/mpdf/mpdf.php';
 require_once "connect.php";
 //custom font
 // session_start();
-$defaultConfig = (new Mpdf\Config\ConfigVariables())->getDefaults();
-$fontDirs = $defaultConfig['fontDir'];
+error_reporting(error_reporting() & ~E_NOTICE);
+error_reporting(E_ERROR | E_PARSE);
 $terms = $_POST["term"];
-$html = "";
 $usernames = $_POST["username"];
 $people_ids = $_POST["people_id"];
-$defaultFontConfig = (new Mpdf\Config\FontVariables())->getDefaults();
 $fontData = $defaultFontConfig['fontdata'];
 $sql = "select subject_id,subject_name,subject_id_book from order_books 
 where status = 0 and term = '$terms' and people_id='$people_ids' group by subject_id,subject_name";
 $res = mysqli_query($conn, $sql);
 $termArr = explode("/", $terms);
-$mpdf = new \Mpdf\Mpdf([
-    'fontDir' => array_merge($fontDirs, [
-        __DIR__ . '/fonts',
-    ]),
-    'fontdata' => $fontData + [
-        'thsarabun' => [
-            'R' => 'THSarabun.ttf',
-            //'I' => 'THSarabunNew Italic.ttf',
-            'B' => 'THSarabun Bold.ttf',
-        ]
-    ],
-    'default_font' => 'thsarabun',
-    'format' => 'A4-L'
-]);
+session_start();
+$mpdf = new mPDF();
+ob_start();
 ?>
 
 <style>
     .content-text {
         font-size: 20px;
+        font-family: "thsarabun";
     }
 
-    div {
+    div,
+    table {
         font-family: "thsarabun";
     }
 
@@ -72,6 +62,7 @@ $mpdf = new \Mpdf\Mpdf([
 </style>
 <?php
 while ($row = mysqli_fetch_array($res)) {
+
     $subject_id = $row["subject_id"];
     $subject_name = $row["subject_name"];
     $sqlData = "select 
@@ -121,8 +112,8 @@ where o.people_id = '$people_ids' and o.status = '0' and o.term = '$terms' and o
         </tr>
         <?php $i = 1;
         while ($rowData2 = mysqli_fetch_array($resData2)) {
-            $sqlUpstatus = "update order_books set status = '1' where people_id = '$people_ids' and status = '0' and term = '$terms' and subject_id = '$subject_id'";
-            mysqli_query($conn, $sqlUpstatus);
+            // $sqlUpstatus = "update order_books set status = '1' where people_id = '$people_ids' and status = '0' and term = '$terms' and subject_id = '$subject_id'";
+            // mysqli_query($conn, $sqlUpstatus);
         ?>
             <tr>
                 <td><?php echo $i; ?></td>
@@ -163,7 +154,6 @@ where o.people_id = '$people_ids' and o.status = '0' and o.term = '$terms' and o
 
             </tr>
         <?php $i++;
-
         } ?>
         <?php
         if ($i - 1 == 1) {
@@ -179,8 +169,7 @@ where o.people_id = '$people_ids' and o.status = '0' and o.term = '$terms' and o
             <td>$i</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
             </tr>";
         }
-        $html = ob_get_contents();
-        ob_clean();
+
         ?>
     </table>
     <div class="content-text">
@@ -207,13 +196,16 @@ where o.people_id = '$people_ids' and o.status = '0' and o.term = '$terms' and o
         </table>
     </div>
 <?php
-    $html2 = ob_get_contents();
-    $mpdf->AddPage("L");
-    $mpdf->WriteHTML($html . $html2);
-    ob_clean();
+
 }
 ?>
 <?php
-$mpdf->Output();
-
+$html = ob_get_contents();
+$mpdf->AddPage('L');
+$mpdf->WriteHTML($html);
+$taget = "pdf/report1.pdf";
+$mpdf->Output($taget);
+ob_end_flush();
+echo "<script>window.location.href='$taget';</script>";
+exit;
 ?>
