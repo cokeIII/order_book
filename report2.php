@@ -185,9 +185,10 @@ $rowData = mysqli_fetch_array($resData);
             <td class="no-bor" colspan="3">(.....................................................)</td>
         </tr>
     </table>
-    <pagebreak></pagebreak>
+    <!-- <pagebreak></pagebreak> -->
 </div>
 <?php
+$mpdf->SetHTMLHeader("<div class='content-text text-right'>แบบฟอร์ม สมอ.1</div>");
 $html = ob_get_contents();
 $mpdf->AddPage('L');
 $mpdf->WriteHTML($html);

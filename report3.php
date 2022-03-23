@@ -17,7 +17,8 @@ $mpdf = new mPDF();
         font-family: "thsarabun";
     }
 
-    div, table {
+    div,
+    table {
         font-family: "thsarabun";
     }
 
@@ -53,6 +54,7 @@ $mpdf = new mPDF();
     .text-left {
         text-align: left;
     }
+
     .text-right {
         text-align: right;
     }
@@ -87,9 +89,9 @@ where pr.people_dep_id = '$dep_id' and o.term = '$term' group by o.subject_id_bo
 $res = mysqli_query($conn, $sql);
 ?>
 <div class="content-text text-center">
-    <div>แบบรายงานการเลือกซื้อหนังสือเรียนของสถานศึกษา</div>
-    <div>ตามโครงการสนับสนุนค่าใช้จ่ายในการจัดการศึกษาตั้งแต่ระดับอนุบาลจนจบการศึกษาขั้นพื้นฐาน</div>
-    <div>ภาคเรียนที่ <?php echo $termArr[0]; ?> ปีการศึกษา <?php echo $termArr[1]; ?></div>
+    <div><strong>แบบรายงานการเลือกซื้อหนังสือเรียนของสถานศึกษา</strong></div>
+    <div><strong>ตามโครงการสนับสนุนค่าใช้จ่ายในการจัดการศึกษาตั้งแต่ระดับอนุบาลจนจบการศึกษาขั้นพื้นฐาน</strong></div>
+    <div><strong>ภาคเรียนที่ <?php echo $termArr[0]; ?> ปีการศึกษา <?php echo $termArr[1]; ?></strong></div>
     <table class="table content-text text-center">
         <tr>
             <th rowspan="2">วิชาที่</th>
@@ -170,6 +172,7 @@ $res = mysqli_query($conn, $sql);
     </table>
 </div>
 <?php
+$mpdf->SetHTMLHeader("<div class='content-text text-right'>แบบฟอร์ม สมอ.2</div>");
 $html2 = ob_get_contents();
 ob_clean();
 $mpdf->WriteHTML($html . $html2);

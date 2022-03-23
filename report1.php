@@ -21,6 +21,10 @@ ob_start();
 ?>
 
 <style>
+    page-break {
+        page-break-after: auto
+    }
+
     .content-text {
         font-size: 20px;
         font-family: "thsarabun";
@@ -58,6 +62,9 @@ ob_start();
 
     .w-100 {
         width: 100%;
+    }
+    .text-right {
+        text-align: right;
     }
 </style>
 <?php
@@ -193,14 +200,15 @@ where o.people_id = '$people_ids' and o.status = '0' and o.term = '$terms' and o
             <tr class="no-bor">
                 <td class="no-bor" colspan="3">(.....................................................)</td>
             </tr>
-        </table> 
+        </table>
     </div>
-    <pagebreak></pagebreak>
+    <pagebreak type="NEXT-ODD" resetpagenum="1" pagenumstyle="i" suppress="off" />
 <?php
 
 }
 ?>
 <?php
+$mpdf->SetHTMLHeader("<div class='content-text text-right'>แบบฟอร์ม สมอ.1</div>");
 $html = ob_get_contents();
 $mpdf->AddPage('L');
 $mpdf->WriteHTML($html);

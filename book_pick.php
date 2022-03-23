@@ -42,7 +42,7 @@
     inner join author a on a.author_id = o.author_id
     inner join publisher pu on pu.pub_id  = o.pub_id
     inner join student_group sg on sg.student_group_id = o.student_group_id
-    where o.people_id = '$people_id' and o.status = '0' and term = '$term' group by subject_id_book,name_book";
+    where o.people_id = '$people_id' and o.status = '0' and term = '$term' ";
     $res = mysqli_query($conn, $sql);
     ?>
     <div class="container h-100 mt-5">
