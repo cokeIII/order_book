@@ -125,7 +125,7 @@
             </div>
 
             <div class="modal-footer">
-                <div class="w-100">
+                <div class="w-100 text-primary">
                     <p class="float-left">* ถ้าค้นหาจากชื่อกลุ่มเรียนไม่เจอ ให้ค้นหาจารหัสกลุ่มเรียนแทน</p>
                 </div>
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

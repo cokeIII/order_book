@@ -103,7 +103,10 @@
                         กลับไปเลือกหนังสือ
                     </a>
                 </div>
-
+                <div class="row w-100 text-primary">
+                    <p class="float-left  mt-5">* หลังจากกด "ยืนยันรายการ" ระบบจะทำการแสดงรายการ สมอ.1 สำหรับพิมพ์(pdf) ทุกรายวิชาที่เลือกไว้ </p>
+                    <p class="float-left  mt-1">* สามารถพิมพ์ สมอ.1 ที่เคยยืนยันรายการไปแล้ว และ สมอ.2 ได้จากเมนู "รายการจัดซื้อ"</p>
+                </div>
             </div>
         </div>
     </div>
@@ -136,8 +139,8 @@ function count_group_std($group_id)
                 'term': <?php echo "'" . $_SESSION["term"] . "'";
                         ?>,
                 'username': <?php echo "'" . $_SESSION["username"] . "'";
-                        ?>,
-            }, "POST","_blank");
+                            ?>,
+            }, "POST", "_blank");
         })
         $(".btnDel").click(function() {
             Swal.fire({
