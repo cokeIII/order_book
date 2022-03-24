@@ -8,7 +8,7 @@
     <!-- Copyright -->
     <div class="text-center p-4" style="background-color: rgba(0, 0, 0, 0.05);">
         © 2021 Copyright:
-        <a class="text-reset fw-bold" href="">kasama jaroensri</a>
+        <a class="text-reset fw-bold" href="https://line.me/ti/p/lzA5X9eUH3">kasama jaroensri</a>
     </div>
     <!-- Copyright -->
 </footer>
