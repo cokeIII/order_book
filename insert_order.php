@@ -1,5 +1,6 @@
 <?php
 require_once "connect.php";
+session_start();
 $subject_id_book = $_POST["subject_id_book"];
 $author_id = $_POST["author_id"];
 $pub_id = $_POST["pub_id"];
@@ -11,7 +12,7 @@ $subject_id = $subjectArr[0];
 $subject_name = $subjectArr[1];
 $note = $_POST["note"];
 $total = count_group_std($_POST["student_group_id"]);
-
+$dep_name = $_SESSION["dep_name"];
 if ($note == "อื่นๆ") {
     $note = $_POST["other"];
 }
@@ -28,7 +29,8 @@ $sql = "insert into order_books
         note,
         status,
         term,
-        total
+        total,
+        dep_name
      ) value(
         '$subject_id',
         '$subject_name',
@@ -40,7 +42,8 @@ $sql = "insert into order_books
         '$note',
         '0',
         '$term',
-        '$total'
+        '$total',
+        '$dep_name'
     )";
 
 $res = mysqli_query($conn, $sql);

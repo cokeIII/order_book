@@ -198,7 +198,7 @@ where o.people_id = '$people_ids' and o.status = '0' and o.term = '$terms' and o
                 <td class="no-bor" colspan="3"><br><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ลงชื่อ.......................................................หัวหน้าแผนกวิชา</td>
             </tr>
             <tr class="no-bor">
-                <td class="no-bor" colspan="3">(.....................................................)</td>
+                <td class="no-bor" colspan="3">(<?php echo $_SESSION["leader"];?>)</td>
             </tr>
         </table>
     </div>

@@ -72,7 +72,7 @@ ob_start();
 <?php
 $term = $_SESSION["term"];
 $termArr = explode("/", $term);
-$dep_id = $_SESSION["dep_id"];
+// $dep_id = $_SESSION["dep_id"];
 $dep_name = $_SESSION["dep_name"];
 $sql = "select 
 o.subject_id_book,
@@ -88,9 +88,7 @@ inner join people pe on pe.people_id = o.people_id
 inner join author a on a.author_id = o.author_id
 inner join publisher pu on pu.pub_id  = o.pub_id
 inner join book b on b.author_id = o.author_id and b.pub_id = o.pub_id and b.subject_id = o.subject_id_book
-inner join people_pro pr on pr.people_id = pe.people_id
-inner join people_dep pd on pd.people_dep_id = pr.people_dep_id
-where pr.people_dep_id = '$dep_id' and o.term = '$term' group by o.subject_id_book,b.name_book
+where o.dep_name = '$dep_name' and o.term = '$term' group by o.subject_id_book,b.name_book
 ";
 $res = mysqli_query($conn, $sql);
 ?>
@@ -146,7 +144,7 @@ $res = mysqli_query($conn, $sql);
             </td>
         </tr>
         <tr class="no-bor">
-            <td class="no-bor" colspan="2">(.....................................................)
+            <td class="no-bor" colspan="2">(<?php echo $_SESSION["leader"];?>)
             </td>
         </tr>
         <tr class="no-bor">

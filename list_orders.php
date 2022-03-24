@@ -27,8 +27,8 @@
     $sql = "select 
     *
     from order_books o
-    inner join student_group sg on sg.student_group_id = o.student_group_id
-    where o.people_id = '$people_id' and o.status = '1' group by o.subject_id,subject_name";
+    inner join group_std_real sg on sg.group_id = o.student_group_id
+    where o.people_id = '$people_id' and o.status = '1' group by o.subject_id,o.subject_name";
     $res = mysqli_query($conn, $sql);
     ?>
     <div class="container h-100 mt-5 mb-3">
@@ -56,6 +56,7 @@
                     </thead>
                     <tbody>
                         <?php $i = 0;
+                        // echo $sql;
                         while ($row = mysqli_fetch_array($res)) { ?>
                             <tr>
                                 <th><?php echo ++$i; ?></th>
