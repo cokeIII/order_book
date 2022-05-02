@@ -58,7 +58,7 @@ for ($row = 1; $row <= $lastRow; $row++) //วน loop อ่านข้อม�
     }
   }
 
-  if (is_numeric(substr($cD, 2, 1))) {
+  if (is_numeric(substr($cD, 3, 1))) {
     $paper_pattern = get_paper_pattern($cI, $cJ, $cK);
     $print_pattern = get_print_pattern($cL, $cM, $cN);
     $size_book = get_size_book($cO, $cP, $cQ);
@@ -92,9 +92,12 @@ for ($row = 1; $row <= $lastRow; $row++) //วน loop อ่านข้อม�
     ) values";
     $autId = $dataAut[$cF];
     $pubId = $dataPub[$cR];
-    $sqlBook .= "('$cB','$cD','$cE','$autId','$cG','$cH','$paper_pattern','$print_pattern','$size_book','$pubId','$cA','$minorCode');";
+    $sqlBook .= "('$cB','$cD','" . str_replace("'", "\'", $cE) . "','$autId','$cG','$cH','$paper_pattern','$print_pattern','$size_book','$pubId','$cA','$minorCode');";
     //insert book
-    mysqli_query($conn, $sqlBook);
+    $res = mysqli_query($conn, $sqlBook);
+    if (!$res) {
+      echo $sqlBook . "<br>";
+    }
   }
 }
 //insert minor_book
