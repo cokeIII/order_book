@@ -51,7 +51,7 @@
                                         <td><?php echo $row["level"]; ?></td>
                                         <td><?php echo $row["group_name"]; ?></td>
                                         <td><?php echo $row["qty_std"]; ?></td>
-                                        <td><button class="btn btn-warning btn-edit" data-toggle="modal" data-target="#stdQtyEdit" group_id="<?php echo $row["group_id"]?>">แก้ไข</button></td>
+                                        <td><button class="btn btn-warning btn-edit" data-toggle="modal" data-target="#stdQtyEdit" group_id="<?php echo $row["group_id"] ?>">แก้ไข</button></td>
                                         <td><button class="btn btn-danger">ลบ</button></td>
                                     </tr>
                                 <?php } ?>
@@ -93,8 +93,18 @@
 <script>
     $(document).ready(function() {
         $("#std").DataTable()
-        $(document).on('click','.group_id',function(){
-            
+        $(document).on('click', '.group_id', function() {
+            $.ajax({
+                type: "POST",
+                url: "admin_query.php",
+                contentType: 'application/json',
+                data: {
+                    act: 'getGroupStd',
+                },
+                success: function(result) {
+                    alert(result);
+                }
+            });
         })
     })
 </script>
