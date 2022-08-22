@@ -28,7 +28,7 @@
                         <h3>จัดการจำนวนนักเรียน/นักศึกษา</h3>
                         <hr>
                         <button class="btn btn-primary float-end mb-3">เพิ่มรายการข้อมูล</button>
-                        <table class="table" id="std">
+                        <table class="table" id="std" width="100%">
                             <thead>
                                 <tr>
                                     <td>รหัสกลุ่ม</td>
@@ -76,12 +76,20 @@
                 </button>
             </div>
             <div class="modal-body">
-                <div class="form-group">
+                <form action="">
+                    <input type="hidden" name="act" value="editGroupStd">
                     <label>รหัสกลุ่ม</label>
-                    <input type="text" readonly>
+                    <input class="form-control" type="text" name="group_id" id="group_id" readonly>
                     <label>ชื่อสาขา</label>
-                    <input type="text">
-                </div>
+                    <input class="form-control" type="text" name="major_name" id="major_name">
+                    <label>ระดับชั้น</label>
+                    <input class="form-control" type="text" name="level" id="level">
+                    <label>ชื่อกลุ่ม</label>
+                    <input class="form-control" type="text" name="group_name" id="group_name">
+                    <label>จำนวนนักเรียน</label>
+                    <input class="form-control" type="number" name="qty_std" id="qty_std">
+                    <button class="btn btn-warning mt-2 float-end">แก้ไข</button>
+                </form>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -92,17 +100,25 @@
 <?php require_once "setFoot.php"; ?>
 <script>
     $(document).ready(function() {
-        $("#std").DataTable()
-        $(document).on('click', '.group_id', function() {
+        $("#std").DataTable({
+            "scrollX": true
+        })
+        $(document).on('click', '.btn-edit', function() {
             $.ajax({
                 type: "POST",
                 url: "admin_query.php",
-                contentType: 'application/json',
+                dataType: 'json',
                 data: {
                     act: 'getGroupStd',
+                    group_id: $(this).attr('group_id')
                 },
                 success: function(result) {
-                    alert(result);
+                    console.log(result);
+                    $("#group_id").val(result.group_id)
+                    $("#major_name").val(result.major_name)
+                    $("#level").val(result.level)
+                    $("#group_name").val(result.group_name)
+                    $("#qty_std").val(result.qty_std)
                 }
             });
         })
