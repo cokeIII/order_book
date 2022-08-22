@@ -53,6 +53,14 @@ ob_start();
     .w-100 {
         width: 100%;
     }
+
+    .text-right {
+        text-align: right;
+    }
+
+    .content-text-bottom {
+        font-size: 20px;
+    }
 </style>
 <?php
 $terms = $_POST["term"];
@@ -60,7 +68,7 @@ $termArr = explode("/", $terms);
 $html = "";
 $subject_id = $_POST["subject_id"];
 $subject_name = $_POST["subject_name"];
-echo $sqlData = "select 
+$sqlData = "select 
 *,sum(o.total) as sumStd
 from order_books o
 inner join book b on b.author_id = o.author_id and b.pub_id = o.pub_id and b.subject_id = o.subject_id_book
@@ -182,7 +190,7 @@ $rowData = mysqli_fetch_array($resData);
             <td class="no-bor" colspan="3"><br><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ลงชื่อ.......................................................หัวหน้าแผนกวิชา</td>
         </tr>
         <tr class="no-bor">
-            <td class="no-bor" colspan="3">(<?php echo $_SESSION["leader"];?>)</td>
+            <td class="no-bor" colspan="3">(<?php echo $_SESSION["leader"]; ?>)</td>
         </tr>
     </table>
     <!-- <pagebreak></pagebreak> -->

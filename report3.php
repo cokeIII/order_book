@@ -75,6 +75,7 @@ $termArr = explode("/", $term);
 // $dep_id = $_SESSION["dep_id"];
 $dep_name = $_SESSION["dep_name"];
 $sql = "select 
+o.people_id,
 o.subject_id_book,
 b.name_book,
 a.author_name,
@@ -88,7 +89,7 @@ inner join people pe on pe.people_id = o.people_id
 inner join author a on a.author_id = o.author_id
 inner join publisher pu on pu.pub_id  = o.pub_id
 inner join book b on b.author_id = o.author_id and b.pub_id = o.pub_id and b.subject_id = o.subject_id_book
-where o.dep_name = '$dep_name' and o.term = '$term' group by o.subject_id_book,b.name_book
+where o.dep_name = '$dep_name' and o.term = '$term' and select_no = '1' and o.status = '1' group by b.name_book,o.author_id,o.pub_id
 ";
 $res = mysqli_query($conn, $sql);
 ?>
@@ -115,7 +116,10 @@ $res = mysqli_query($conn, $sql);
             <td>ไม่เห็นชอบ</td>
         </tr>
         <?php $i = 1;
-        while ($row = mysqli_fetch_array($res)) { ?>
+        $dataCheck = array();
+        while ($row = mysqli_fetch_array($res)) { 
+            $dataCheck["people_id"]
+            ?>
             <tr>
                 <td><?php echo $i++; ?></td>
                 <td><?php echo $row["subject_id_book"]; ?></td>
