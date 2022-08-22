@@ -24,14 +24,13 @@ if (intval(date("m")) >= 3 && intval(date("m")) < 8) {
         <a href="form_order.php" class="nav-item nav-link active">
           <h5><img src="img/logo-login.png" width="30" height="30"> ระบบจัดซื้อหนังสือ วิทยาลัยเทคนิคชลบุรี</h5>
         </a>
-        <?php if (!empty($_SESSION["status"]) && $_SESSION["status"] == "staff") { ?>
-          <!-- <div class="nav-item dropdown">
-            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">จัดการหนังสือ</a>
-            <div class="dropdown-menu">
-              <a href="#" class="dropdown-item"></a>
-            </div>
-          </div> -->
-          <a href="#" class="nav-item nav-link">
+        <?php if (!empty($_SESSION["status"]) && $_SESSION["status"] == "admin") { ?>
+          <a href="admin.php" class="nav-item nav-link">
+            <img src="img/students.png" width="30" height="30">
+            จัดการจำนวนนักเรียน/นักศึกษา
+          </a>
+          <a href="book_manage.php" class="nav-item nav-link">
+            <img src="img/books.png" width="30" height="30">
             จัดการหนังสือ
           </a>
         <?php } else if (!empty($_SESSION["status"]) && $_SESSION["status"] == "user") { ?>
@@ -47,7 +46,7 @@ if (intval(date("m")) >= 3 && intval(date("m")) < 8) {
       </div>
       <div class="navbar-nav">
         <a href="#" class="nav-item nav-link">
-          <?php echo (empty($_SESSION["username"]) ? "" : $_SESSION["username"]." ".$_SESSION["dep_name"]); ?>
+          <?php echo (empty($_SESSION["username"]) ? "" : $_SESSION["username"] . " " . $_SESSION["dep_name"]); ?>
         </a>
         <?php if (!empty($_SESSION["people_id"])) { ?>
           <a href="logout.php" class="nav-item nav-link">Logout</a>
