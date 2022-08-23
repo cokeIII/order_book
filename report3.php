@@ -10,6 +10,7 @@ error_reporting(error_reporting() & ~E_NOTICE);
 error_reporting(E_ERROR | E_PARSE);
 session_start();
 $mpdf = new mPDF();
+ob_clean();
 ob_start();
 // $mpdf = new \Mpdf\Mpdf();
 ?>
@@ -183,13 +184,14 @@ $res = mysqli_query($conn, $sql);
     </table>
 </div>
 <?php
-// $mpdf->SetHTMLHeader("<div class='content-text text-right'>แบบฟอร์ม สมอ.2</div>");
-// $html = ob_get_contents();
-// // $mpdf->AddPage('L');
-// $mpdf->WriteHTML($html);
-// $taget = "pdf/report3.pdf";
-// $mpdf->Output($taget);
-// ob_end_flush();
-// echo "<script>window.location.href='$taget';</script>";
-// exit;
+$mpdf->SetHTMLHeader("<div class='content-text text-right'>แบบฟอร์ม สมอ.2</div>");
+$html = ob_get_contents();
+// $mpdf->AddPage('L');
+$mpdf->WriteHTML($html);
+$taget = "pdf/report3.pdf";
+$mpdf->Output($taget);
+ob_end_flush();
+ob_clean();
+echo "<script>window.location.href='$taget';</script>";
+exit;
 ?>
