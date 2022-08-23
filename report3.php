@@ -12,6 +12,10 @@ session_start();
 $mpdf = new mPDF();
 ob_start();
 // $mpdf = new \Mpdf\Mpdf();
+ini_set('default_charset', 'UTF-8');
+mb_internal_encoding('UTF-8');
+iconv_set_encoding('internal_encoding', 'UTF-8');
+iconv_set_encoding('output_encoding', 'UTF-8');
 ?>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <style>
@@ -117,9 +121,9 @@ $res = mysqli_query($conn, $sql);
         </tr>
         <?php $i = 1;
         $dataCheck = array();
-        while ($row = mysqli_fetch_array($res)) { 
+        while ($row = mysqli_fetch_array($res)) {
             $dataCheck["people_id"]
-            ?>
+        ?>
             <tr>
                 <td><?php echo $i++; ?></td>
                 <td><?php echo $row["subject_id_book"]; ?></td>
@@ -140,9 +144,9 @@ $res = mysqli_query($conn, $sql);
             }
         } ?>
     </table>
-    <?php 
-        $html1 = ob_get_contents();
-        ob_clean();
+    <?php
+    $html1 = ob_get_contents();
+    ob_clean();
     ?>
     <br>
     <table class="content-text-bottom text-center" width="100%">
@@ -151,7 +155,7 @@ $res = mysqli_query($conn, $sql);
             </td>
         </tr>
         <tr class="no-bor">
-            <td class="no-bor" colspan="2">(<?php echo $_SESSION["leader"];?>)
+            <td class="no-bor" colspan="2">(<?php echo $_SESSION["leader"]; ?>)
             </td>
         </tr>
         <tr class="no-bor">
