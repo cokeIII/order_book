@@ -189,7 +189,7 @@ $res = mysqli_query($conn, $sql);
 $mpdf->SetHTMLHeader("<div class='content-text text-right'>แบบฟอร์ม สมอ.2</div>");
 $html2 = ob_get_contents();
 // $mpdf->AddPage('L');
-$html = $html1+$html2;
+$html = $html1.$html2;
 $mpdf->WriteHTML($html);
 $taget = "pdf/report3.pdf";
 $mpdf->Output($taget);
