@@ -208,13 +208,13 @@ where o.people_id = '$people_ids' and o.status = '0' and o.term = '$terms' and o
 }
 ?>
 <?php
- $mpdf->SetHTMLHeader("<div class='content-text text-right'>แบบฟอร์ม สมอ.1</div>");
-$html = ob_get_contents();
-$mpdf->AddPage('L');
-$mpdf->WriteHTML($html);
-$taget = "pdf/report1.pdf";
-$mpdf->Output($taget);
-ob_end_flush();
-echo "<script>window.location.href='$taget';</script>";
+//  $mpdf->SetHTMLHeader("<div class='content-text text-right'>แบบฟอร์ม สมอ.1</div>");
+// $html = ob_get_contents();
+// $mpdf->AddPage('L');
+// $mpdf->WriteHTML($html);
+// $taget = "pdf/report1.pdf";
+// $mpdf->Output($taget);
+// ob_end_flush();
+// echo "<script>window.location.href='$taget';</script>";
 exit;
 ?>
