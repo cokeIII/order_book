@@ -10,7 +10,6 @@ error_reporting(error_reporting() & ~E_NOTICE);
 error_reporting(E_ERROR | E_PARSE);
 session_start();
 $mpdf = new mPDF();
-ob_clean();
 ob_start();
 // $mpdf = new \Mpdf\Mpdf();
 ?>
@@ -141,7 +140,10 @@ $res = mysqli_query($conn, $sql);
             }
         } ?>
     </table>
-
+    <?php 
+        $html1 = ob_get_contents();
+        ob_clean();
+    ?>
     <br>
     <table class="content-text-bottom text-center" width="100%">
         <tr class="no-bor">
@@ -185,13 +187,13 @@ $res = mysqli_query($conn, $sql);
 </div>
 <?php
 $mpdf->SetHTMLHeader("<div class='content-text text-right'>แบบฟอร์ม สมอ.2</div>");
-$html = ob_get_contents();
+$html2 = ob_get_contents();
 // $mpdf->AddPage('L');
+$html = $html1+$html2;
 $mpdf->WriteHTML($html);
 $taget = "pdf/report3.pdf";
 $mpdf->Output($taget);
 ob_end_flush();
-ob_clean();
 echo "<script>window.location.href='$taget';</script>";
 exit;
 ?>
