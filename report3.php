@@ -13,7 +13,7 @@ $mpdf = new mPDF();
 ob_start();
 // $mpdf = new \Mpdf\Mpdf();
 ?>
-
+<meta charset="UTF-8">
 <style>
     .content-text {
         font-size: 20px;
