@@ -23,7 +23,7 @@ if ($username == "admin" && $password == "adminbook") {
         $_SESSION["username"] = $row["people_name"] . " " . $row["people_surname"];
         header("location: form_order.php");
     } else {
-        //header("location: error-page.php?text-error=เข้าสูระบบไม่สำเร็จกรุณาลองใหม่อีกครั้ง <a href='index.php'>เข้าสู่ระบบ</a>");
+        header("location: error-page.php?text-error=เข้าสูระบบไม่สำเร็จกรุณาลองใหม่อีกครั้ง <a href='index.php'>เข้าสู่ระบบ</a>");
     }
 } else {
     header("location: error-page.php?text-error=เข้าสูระบบไม่สำเร็จกรุณาลองใหม่อีกครั้ง <a href='index.php'>เข้าสู่ระบบ</a>");
