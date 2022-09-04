@@ -7,7 +7,7 @@ if ($username == "admin" && $password == "adminbook") {
     header("location: admin.php");
     $_SESSION["status"] = "admin";
 } else if ($password == "orderbook") {
-    echo $sql = "select pe.people_id,pe.people_name,pe.people_surname,pr.people_id,pr.dep_name 
+    $sql = "select pe.people_id,pe.people_name,pe.people_surname,pr.people_id,pr.dep_name 
     from people pe
     inner join people_real pr on pr.people_id = pe.people_id
     where pe.people_id = '$username'";
