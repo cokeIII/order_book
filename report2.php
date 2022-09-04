@@ -53,6 +53,14 @@ ob_start();
     .w-100 {
         width: 100%;
     }
+
+    .text-right {
+        text-align: right;
+    }
+
+    .content-text-bottom {
+        font-size: 20px;
+    }
 </style>
 <?php
 $terms = $_POST["term"];
@@ -60,7 +68,7 @@ $termArr = explode("/", $terms);
 $html = "";
 $subject_id = $_POST["subject_id"];
 $subject_name = $_POST["subject_name"];
-echo $sqlData = "select 
+$sqlData = "select 
 *,sum(o.total) as sumStd
 from order_books o
 inner join book b on b.author_id = o.author_id and b.pub_id = o.pub_id and b.subject_id = o.subject_id_book
@@ -78,6 +86,10 @@ $rowData = mysqli_fetch_array($resData);
     <div><strong>ภาคเรียนที่ <?php echo $termArr[0]; ?></strong><strong> ปีการศึกษา <?php echo $termArr[1]; ?></strong></div>
     <div><strong>รหัสวิชา <?php echo $subject_id; ?> ชื่อวิชา <?php echo $rowData["subject_name"]; ?> ระดับชั้น <?php echo $rowData["grade_name"]; ?> ครูผู้สอน <?php echo $usernames; ?></strong></div>
 </div>
+<?php
+$html1 = ob_get_contents();
+ob_clean();
+?>
 <table class="table content-text text-center w-100">
     <tr>
         <th rowspan="2">ลำดับที่</th>
@@ -104,6 +116,10 @@ $rowData = mysqli_fetch_array($resData);
         <th>A4</th>
         <th>อื่นๆ</th>
     </tr>
+    <?php
+    $html2 = ob_get_contents();
+    ob_clean();
+    ?>
     <?php $i = 1;
     while ($rowData2 = mysqli_fetch_array($resData2)) {
     ?>
@@ -163,6 +179,10 @@ $rowData = mysqli_fetch_array($resData);
     }
     ?>
 </table>
+<?php
+$html3 = ob_get_contents();
+ob_clean();
+?>
 <div class="content-text">
     <p><strong><u>หมายเหตุ</u></strong> ลำดับที่เลือกอันดับแรกเป็นหนังสือที่มีความต้องการจัดซื้อ</p>
     <p>กรณีผู้สอนเสนอรายชื่อหนังสือน้อยกว่า 3 เล่ม เนื่องจาก.....................................................................................................................................................................................................................</p>
@@ -182,14 +202,15 @@ $rowData = mysqli_fetch_array($resData);
             <td class="no-bor" colspan="3"><br><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ลงชื่อ.......................................................หัวหน้าแผนกวิชา</td>
         </tr>
         <tr class="no-bor">
-            <td class="no-bor" colspan="3">(<?php echo $_SESSION["leader"];?>)</td>
+            <td class="no-bor" colspan="3">(<?php echo $_SESSION["leader"]; ?>)</td>
         </tr>
     </table>
     <!-- <pagebreak></pagebreak> -->
 </div>
 <?php
 $mpdf->SetHTMLHeader("<div class='content-text text-right'>แบบฟอร์ม สมอ.1</div>");
-$html = ob_get_contents();
+$html4 = ob_get_contents();
+$html = $html1 . $html2 . $html3 . $html4;
 $mpdf->AddPage('L');
 $mpdf->WriteHTML($html);
 $taget = "pdf/report2.pdf";
