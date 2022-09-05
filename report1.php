@@ -123,8 +123,9 @@ where o.people_id = '$people_ids' and o.status = '0' and o.term = '$terms' and o
             $subject_id_book = $rowData2["subject_id_book"];
             $pub_id = $rowData2["pub_id"];
             $author_id = $rowData2["author_id"];
-            $sqlUpstatus = "update order_books set status = '1' where people_id = '$people_ids' and status = '0' and term = '$terms' and subject_id = '$subject_id'";
+            $sqlUpstatus = "update order_books set status = '0' where people_id = '$people_ids' and status = '0' and term = '$terms' and subject_id = '$subject_id'";
             $sqlUpdateNo = "update order_books set select_no = '$i' where people_id = '$people_ids' and status = '0' and term = '$terms' and subject_id = '$subject_id' and subject_id_book = '$subject_id_book' and author_id = '$author_id' and pub_id = '$pub_id'";
+            echo $sqlUpdateNo;
             $resNo = mysqli_query($conn, $sqlUpdateNo);
             if ($resNo) {
                 mysqli_query($conn, $sqlUpstatus);
@@ -220,14 +221,14 @@ where o.people_id = '$people_ids' and o.status = '0' and o.term = '$terms' and o
 }
 ?>
 <?php
-$mpdf->SetHTMLHeader("<div class='content-text text-right'>แบบฟอร์ม สมอ.1</div>");
-$html2 = ob_get_contents();
-$html = $html1.$html2;
-$mpdf->AddPage('L');
-$mpdf->WriteHTML($html);
-$taget = "pdf/report1.pdf";
-$mpdf->Output($taget);
-ob_end_flush();
-echo "<script>window.location.href='$taget';</script>";
+// $mpdf->SetHTMLHeader("<div class='content-text text-right'>แบบฟอร์ม สมอ.1</div>");
+// $html2 = ob_get_contents();
+// $html = $html1.$html2;
+// $mpdf->AddPage('L');
+// $mpdf->WriteHTML($html);
+// $taget = "pdf/report1.pdf";
+// $mpdf->Output($taget);
+// ob_end_flush();
+// echo "<script>window.location.href='$taget';</script>";
 exit;
 ?>
