@@ -187,8 +187,8 @@ where o.people_id = '$people_ids' and o.status = '0' and o.term = '$terms' and o
         ?>
     </table>
     <?php
-    // $html1 = ob_get_contents();
-    // ob_clean();
+    $html1 = ob_get_contents();
+    ob_clean();
     ?>
     <div class="content-text">
         <p><strong><u>หมายเหตุ</u></strong> ลำดับที่เลือกอันดับแรกเป็นหนังสือที่มีความต้องการจัดซื้อ</p>
@@ -219,14 +219,14 @@ where o.people_id = '$people_ids' and o.status = '0' and o.term = '$terms' and o
 }
 ?>
 <?php
-// $mpdf->SetHTMLHeader("<div class='content-text text-right'>แบบฟอร์ม สมอ.1</div>");
-// $html2 = ob_get_contents();
-// $html = $html1.$html2;
-// $mpdf->AddPage('L');
-// $mpdf->WriteHTML($html);
-// $taget = "pdf/report1.pdf";
-// $mpdf->Output($taget);
-// ob_end_flush();
-// echo "<script>window.location.href='$taget';</script>";
+$mpdf->SetHTMLHeader("<div class='content-text text-right'>แบบฟอร์ม สมอ.1</div>");
+$html2 = ob_get_contents();
+$html = $html1.$html2;
+$mpdf->AddPage('L');
+$mpdf->WriteHTML($html);
+$taget = "pdf/report1.pdf";
+$mpdf->Output($taget);
+ob_end_flush();
+echo "<script>window.location.href='$taget';</script>";
 exit;
 ?>
