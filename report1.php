@@ -119,7 +119,7 @@ where o.people_id = '$people_ids' and o.status = '0' and o.term = '$terms' and o
         </tr>
         <?php $i = 1;
         while ($rowData2 = mysqli_fetch_array($resData2)) {
-            $sqlUpstatus = "update order_books set status = '1', select_no = '$i' where people_id = '$people_ids' and status = '0' and term = '$terms' and subject_id = '$subject_id'";
+            echo $sqlUpstatus = "update order_books set status = '1', select_no = '$i' where people_id = '$people_ids' and status = '0' and term = '$terms' and subject_id = '$subject_id'";
             mysqli_query($conn, $sqlUpstatus);
         ?>
             <tr>
@@ -220,6 +220,6 @@ $mpdf->WriteHTML($html);
 $taget = "pdf/report1.pdf";
 $mpdf->Output($taget);
 ob_end_flush();
-echo "<script>window.location.href='$taget';</script>";
+// echo "<script>window.location.href='$taget';</script>";
 exit;
 ?>
