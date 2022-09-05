@@ -4,7 +4,7 @@ require_once 'vendor/autoload.php';
 require_once 'vendor/mpdf/mpdf/mpdf.php';
 require_once "connect.php";
 //custom font
-// session_start();
+session_start();
 header('Content-Type: text/html; charset=UTF-8');
 error_reporting(error_reporting() & ~E_NOTICE);
 error_reporting(E_ERROR | E_PARSE);
@@ -64,6 +64,7 @@ ob_start();
     .w-100 {
         width: 100%;
     }
+
     .text-right {
         text-align: right;
     }
@@ -119,8 +120,15 @@ where o.people_id = '$people_ids' and o.status = '0' and o.term = '$terms' and o
         </tr>
         <?php $i = 1;
         while ($rowData2 = mysqli_fetch_array($resData2)) {
-            echo $sqlUpstatus = "update order_books set status = '1', select_no = '$i' where people_id = '$people_ids' and status = '0' and term = '$terms' and subject_id = '$subject_id'";
-            mysqli_query($conn, $sqlUpstatus);
+            $subject_id_book = $rowData2["subject_id_book"];
+            $pub_id = $rowData2["pub_id"];
+            $author_id = $rowData2["author_id"];
+            $sqlUpstatus = "update order_books set status = '1' where people_id = '$people_ids' and status = '0' and term = '$terms' and subject_id = '$subject_id'";
+            $sqlUpdateNo = "update order_books set select_no = '$i' where people_id = '$people_ids' and status = '0' and term = '$terms' and subject_id = '$subject_id' and subject_id_book = '$subject_id_book' and author_id = '$author_id' and pub_id = '$pub_id'";
+            $resNo = mysqli_query($conn, $sqlUpdateNo);
+            if ($resNo) {
+                mysqli_query($conn, $sqlUpstatus);
+            }
         ?>
             <tr>
                 <td><?php echo $i; ?></td>
@@ -179,9 +187,9 @@ where o.people_id = '$people_ids' and o.status = '0' and o.term = '$terms' and o
 
         ?>
     </table>
-    <?php 
-        $html1 = ob_get_contents();
-        ob_clean();
+    <?php
+    $html1 = ob_get_contents();
+    ob_clean();
     ?>
     <div class="content-text">
         <p><strong><u>หมายเหตุ</u></strong> ลำดับที่เลือกอันดับแรกเป็นหนังสือที่มีความต้องการจัดซื้อ</p>
@@ -202,7 +210,7 @@ where o.people_id = '$people_ids' and o.status = '0' and o.term = '$terms' and o
                 <td class="no-bor" colspan="3"><br><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ลงชื่อ.......................................................หัวหน้าแผนกวิชา</td>
             </tr>
             <tr class="no-bor">
-                <td class="no-bor" colspan="3">(<?php echo $_SESSION["leader"];?>)</td>
+                <td class="no-bor" colspan="3">(<?php echo $_SESSION["leader"]; ?>)</td>
             </tr>
         </table>
     </div>
@@ -220,6 +228,6 @@ $mpdf->WriteHTML($html);
 $taget = "pdf/report1.pdf";
 $mpdf->Output($taget);
 ob_end_flush();
-// echo "<script>window.location.href='$taget';</script>";
+echo "<script>window.location.href='$taget';</script>";
 exit;
 ?>
