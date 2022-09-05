@@ -132,7 +132,8 @@
 <script>
     $(document).ready(function() {
         $("#std").DataTable({
-            "scrollX": true
+            "scrollX": true,
+            paging: false,
         })
         $(document).on('click', '.btn-del', function() {
             let group_id = $(this).attr('group_id')

@@ -7,7 +7,7 @@ if ($username == "admin" && $password == "adminbook") {
     header("location: admin.php");
     $_SESSION["status"] = "admin";
 } else if ($password == "orderbook") {
-    echo $sql = "select pe.people_id,pe.people_name,pe.people_surname,pr.people_id,pr.dep_name 
+    $sql = "select pe.people_id,pe.people_name,pe.people_surname,pr.people_id,pr.dep_name 
     from people pe
     inner join people_real pr on pr.people_id = pe.people_id
     where pe.people_id = '$username'";
@@ -23,7 +23,7 @@ if ($username == "admin" && $password == "adminbook") {
         $_SESSION["username"] = $row["people_name"] . " " . $row["people_surname"];
         header("location: form_order.php");
     } else {
-        //header("location: error-page.php?text-error=เข้าสูระบบไม่สำเร็จกรุณาลองใหม่อีกครั้ง <a href='index.php'>เข้าสู่ระบบ</a>");
+        header("location: error-page.php?text-error=เข้าสูระบบไม่สำเร็จกรุณาลองใหม่อีกครั้ง <a href='index.php'>เข้าสู่ระบบ</a>");
     }
 } else {
     header("location: error-page.php?text-error=เข้าสูระบบไม่สำเร็จกรุณาลองใหม่อีกครั้ง <a href='index.php'>เข้าสู่ระบบ</a>");
