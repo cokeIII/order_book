@@ -189,8 +189,8 @@ where o.people_id = '$people_ids' and o.status = '0' and o.term = '$terms' and o
         ?>
     </table>
     <?php
-    $html1 = ob_get_contents();
-    ob_clean();
+    // $html1 = ob_get_contents();
+    // ob_clean();
     ?>
     <div class="content-text">
         <p><strong><u>หมายเหตุ</u></strong> ลำดับที่เลือกอันดับแรกเป็นหนังสือที่มีความต้องการจัดซื้อ</p>
