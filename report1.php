@@ -127,7 +127,7 @@ where o.people_id = '$people_ids' and o.status = '0' and o.term = '$terms' and o
             $subject_id_book = $rowData2["subject_id_book"];
             $pub_id = $rowData2["pub_id"];
             $author_id = $rowData2["author_id"];
-            $sqlUpdateNo = "update order_books set select_no = '$i',status = '1' where people_id = '$people_ids' and status = '0' and term = '$terms' and subject_id = '$subject_id' and subject_id_book = '$subject_id_book' and author_id = '$author_id' and pub_id = '$pub_id'";
+            $sqlUpdateNo = "update order_books set select_no = '$i' where people_id = '$people_ids' and status = '0' and term = '$terms' and subject_id = '$subject_id' and subject_id_book = '$subject_id_book' and author_id = '$author_id' and pub_id = '$pub_id'";
             $resNo = mysqli_query($conn, $sqlUpdateNo);
         ?>
             <tr>
@@ -190,6 +190,8 @@ where o.people_id = '$people_ids' and o.status = '0' and o.term = '$terms' and o
     <?php
     $html1 = $html1.ob_get_contents();
     ob_clean();
+    $sqlUpdateStatus = "update order_books set status = '1' where people_id = '$people_ids' and status = '0' and term = '$terms' and subject_id = '$subject_id' and subject_id_book = '$subject_id_book' and author_id = '$author_id' and pub_id = '$pub_id'";
+    mysqli_query($conn, $sqlUpdateStatus)
     ?>
     <div class="content-text">
         <p><strong><u>หมายเหตุ</u></strong> ลำดับที่เลือกอันดับแรกเป็นหนังสือที่มีความต้องการจัดซื้อ</p>
