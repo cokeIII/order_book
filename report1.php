@@ -18,6 +18,7 @@ $res = mysqli_query($conn, $sql);
 $termArr = explode("/", $terms);
 session_start();
 $mpdf = new mPDF();
+$html1 = "";
 ob_start();
 ?>
 
@@ -187,7 +188,7 @@ where o.people_id = '$people_ids' and o.status = '0' and o.term = '$terms' and o
         ?>
     </table>
     <?php
-    $html1 = ob_get_contents();
+    $html1 = $html1.ob_get_contents();
     ob_clean();
     ?>
     <div class="content-text">
