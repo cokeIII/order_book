@@ -6,12 +6,18 @@ function getDep($p_id)
     global $conn;
     echo $sql = "select * from people_pro pr
     inner join people_dep pd on pd.people_dep_id = pr.people_dep_id
+    inner join people_stagov ps on ps.people_stagov_id = pr.people_stagov_id
     where pr.people_id = '$p_id' and pd.people_depgroup_id = 3
     ";
     echo "<br>";
     $res = mysqli_query($conn, $sql);
     $row = mysqli_fetch_array($res);
-    return $row["people_dep_name"];
+    if($row["people_stagov_name"] == "หัวหน้าแผนก"){
+        $people_stagov = 1;
+    } else {
+        $people_stagov = 2;
+    }
+    return [$row["people_dep_name"],$people_stagov];
 }
 $sqlCheckP = "select * from people p
 where p.people_id not in(select pl.people_id from people_real pl)";
@@ -23,8 +29,8 @@ while ($rowCheckP = mysqli_fetch_array($resCheckP)) {
     $people_surname = $rowCheckP["people_surname"];
     $people_dep_name = getDep($people_id);
     $sqlAddP = "insert into people_real 
-    (people_name,people_surname,dep_name)
-    value('$people_name','$people_surname','$people_dep_name')
+    (people_name,people_surname,dep_name,dep_status)
+    value('$people_name','$people_surname','$people_dep_name[0]','$people_dep_name[1]')
     ";
     mysqli_query($conn, $sqlAddP);
 }
