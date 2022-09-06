@@ -1,5 +1,17 @@
 <?php 
 require_once "connect.php";
+$sqlCheckP = "select * from people where people_id not (select people_id from people)";
+$resCheckP = mysqli_query($conn,$sqlCheckP);
+while($rowCheckP = mysqli_fetch_array($resCheckP)){
+    $people_name = $rowCheckP["people_name"];
+    $people_surname = $rowCheckP["people_surname"];
+    $sqlAddP = "insert into people_real 
+    (people_name,people_surname)
+    value('$people_name','$people_surname')
+    ";
+    mysqli_query($conn,$sqlAddP);
+}
+
 $sqlR = "select * from people_real";
 $resR = mysqli_query($conn,$sqlR);
 while($rowR = mysqli_fetch_array($resR)){
