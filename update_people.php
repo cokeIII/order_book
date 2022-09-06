@@ -25,7 +25,7 @@ while($rowR = mysqli_fetch_array($resR)){
     $row = mysqli_fetch_array($res);
     $people_id = $row["people_id"];
     $people_idR = $rowR["people_id"];
-    echo $sqlUp = "update people_real set people_id = '$people_id' where people_id = '$people_idR'";
+    echo $sqlUp = "update people_real set people_id = '$people_id' where people_name like '%".$people_name."%' and people_surname like '%".$people_surname."%'";
     mysqli_query($conn,$sqlUp);
     echo "<br>";
 }
