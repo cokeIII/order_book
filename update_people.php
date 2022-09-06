@@ -4,7 +4,7 @@ header('Content-Type: text/html; charset=utf-8');
 $sqlCheckP = "select * from people p
 left join people_pro pr on pr.people_id = p.people_id
 left join people_dep pd on pd.people_dep_id = pr.people_dep_id
-where p.people_id not in(select people_id from people_real)";
+where p.people_id not in(select pl.people_id from people_real pl) and pd.people_depgroup_id = 3";
 $resCheckP = mysqli_query($conn,$sqlCheckP);
 while($rowCheckP = mysqli_fetch_array($resCheckP)){
     echo "-----------------------INSERT-------------------------------<br>";
