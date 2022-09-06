@@ -1,16 +1,25 @@
 <?php 
 require_once "connect.php";
 header('Content-Type: text/html; charset=utf-8');
+function getDep($p_id){
+    global $conn;
+    $sql = "select * people_pro pr
+    inner join people_dep pd on pd.people_dep_id = pr.people_dep_id
+    where pr.people_id = '$p_id' and pd.people_depgroup_id = 3
+    ";
+    $res = mysqli_query($conn,$sql);
+    $row = mysqli_fetch_array($res);
+    return $row["people_dep_name"];
+}
 $sqlCheckP = "select * from people p
-left join people_pro pr on pr.people_id = p.people_id
-left join people_dep pd on pd.people_dep_id = pr.people_dep_id
-where p.people_id not in(select pl.people_id from people_real pl) and pd.people_depgroup_id = 3";
+where p.people_id not in(select pl.people_id from people_real pl)";
 $resCheckP = mysqli_query($conn,$sqlCheckP);
 while($rowCheckP = mysqli_fetch_array($resCheckP)){
     echo "-----------------------INSERT-------------------------------<br>";
+    $people_id = $rowCheckP["people_id"];
     $people_name = $rowCheckP["people_name"];
     $people_surname = $rowCheckP["people_surname"];
-    $people_dep_name = $rowCheckP["people_dep_name"];
+    $people_dep_name = getDep($people_id );
     $sqlAddP = "insert into people_real 
     (people_name,people_surname,dep_name)
     value('$people_name','$people_surname','$people_dep_name')
