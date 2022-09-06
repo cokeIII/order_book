@@ -169,7 +169,7 @@ $res = mysqli_query($conn, $sql);
             <td class="no-bor"></td>
         </tr>
         <tr class="no-bor">
-            <td class="no-bor text-left" width="60%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(นายอภิชาติ อนุกูลเวช) กรรมการภาคี 4 ฝ่าย</td>
+            <td class="no-bor text-left" width="60%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(นางสองเมือง กุดั่น) กรรมการภาคี 4 ฝ่าย</td>
             <td class="no-bor text-left">ลงชื่อ................................................ผู้แทนชุมชน</td>
         </tr>
         <tr class="no-bor">
