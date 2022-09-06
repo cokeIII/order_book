@@ -1,15 +1,19 @@
 <?php 
 require_once "connect.php";
 header('Content-Type: text/html; charset=utf-8');
-$sqlCheckP = "select * from people people_real where people_id not in(select people_id from people_real)";
+$sqlCheckP = "select * from people p
+inner join people_pro pr on pr.people_id = p.people_id
+inner join people_dep pd on pd.people_dep_id = pr.people_dep_id
+where p.people_id not in(select people_id from people_real)";
 $resCheckP = mysqli_query($conn,$sqlCheckP);
 while($rowCheckP = mysqli_fetch_array($resCheckP)){
     echo "-----------------------INSERT-------------------------------<br>";
     $people_name = $rowCheckP["people_name"];
     $people_surname = $rowCheckP["people_surname"];
+    $people_dep_name = $rowCheckP["people_dep_name"];
     $sqlAddP = "insert into people_real 
-    (people_name,people_surname)
-    value('$people_name','$people_surname')
+    (people_name,people_surname,dep_name)
+    value('$people_name','$people_surname','$people_dep_name')
     ";
     mysqli_query($conn,$sqlAddP);
 }
