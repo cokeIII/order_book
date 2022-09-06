@@ -1,6 +1,6 @@
 <?php 
 require_once "connect.php";
-$sqlCheckP = "select * from people where people_id not (select people_id from people)";
+$sqlCheckP = "select * from people people_real where people_id not in(select people_id from people_real)";
 $resCheckP = mysqli_query($conn,$sqlCheckP);
 while($rowCheckP = mysqli_fetch_array($resCheckP)){
     $people_name = $rowCheckP["people_name"];
