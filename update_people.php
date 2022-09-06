@@ -4,7 +4,7 @@ header('Content-Type: text/html; charset=utf-8');
 function getDep($p_id)
 {
     global $conn;
-    echo $sql = "select * people_pro pr
+    echo $sql = "select * from people_pro pr
     inner join people_dep pd on pd.people_dep_id = pr.people_dep_id
     where pr.people_id = '$p_id' and pd.people_depgroup_id = 3
     ";
