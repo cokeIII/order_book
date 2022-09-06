@@ -19,7 +19,8 @@ $resR = mysqli_query($conn,$sqlR);
 while($rowR = mysqli_fetch_array($resR)){
     $people_name = $rowR["people_name"];
     $people_surname = $rowR["people_surname"];
-    $sql = "select * from people where people_name like '%".$people_name."%' and people_surname like '%".$people_surname."%'";
+    echo $sql = "select * from people where people_name like '%".$people_name."%' and people_surname like '%".$people_surname."%'";
+    echo "<br>";
     $res = mysqli_query($conn,$sql);
     $row = mysqli_fetch_array($res);
     $people_id = $row["people_id"];
