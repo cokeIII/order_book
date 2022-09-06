@@ -2,8 +2,8 @@
 require_once "connect.php";
 header('Content-Type: text/html; charset=utf-8');
 $sqlCheckP = "select * from people p
-inner join people_pro pr on pr.people_id = p.people_id
-inner join people_dep pd on pd.people_dep_id = pr.people_dep_id
+left join people_pro pr on pr.people_id = p.people_id
+left join people_dep pd on pd.people_dep_id = pr.people_dep_id
 where p.people_id not in(select people_id from people_real)";
 $resCheckP = mysqli_query($conn,$sqlCheckP);
 while($rowCheckP = mysqli_fetch_array($resCheckP)){
