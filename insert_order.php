@@ -68,8 +68,9 @@ function count_group_std($group_id)
 function getNO($subject_id, $term, $people_id)
 {
     global $conn;
-    $sqlNo = "select count(order_id) as getNo from order_books where subject_id = '$subject_id' and term = '$term' and people_id = '$people_id'";
+    $sqlNo = "select count(order_id) as getNo from order_books where subject_id = '$subject_id' and term = '$term' and people_id = '$people_id' group by subject_id_book,author_id,pub_id";
     $resNo = mysqli_query($conn, $sqlNo);
     $NO = mysqli_fetch_array($resNo);
-    return $NO["getNo"] + 1;
+    $noNum = mysqli_num_rows($resNo);
+    return $noNum + 1;
 }
