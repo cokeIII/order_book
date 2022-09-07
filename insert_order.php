@@ -1,6 +1,7 @@
 <?php
 require_once "connect.php";
 session_start();
+
 $subject_id_book = $_POST["subject_id_book"];
 $author_id = $_POST["author_id"];
 $pub_id = $_POST["pub_id"];
@@ -16,7 +17,9 @@ $dep_name = $_SESSION["dep_name"];
 if ($note == "อื่นๆ") {
     $note = $_POST["other"];
 }
+
 $term = $_POST["term"];
+$NO = getNO($subject_id, $term, $people_id);
 $sql = "insert into order_books 
     (
         subject_id,
@@ -30,7 +33,8 @@ $sql = "insert into order_books
         status,
         term,
         total,
-        dep_name
+        dep_name,
+        select_no
      ) value(
         '$subject_id',
         '$subject_name',
@@ -43,7 +47,8 @@ $sql = "insert into order_books
         '0',
         '$term',
         '$total',
-        '$dep_name'
+        '$dep_name',
+        '$NO'
     )";
 
 $res = mysqli_query($conn, $sql);
@@ -59,4 +64,12 @@ function count_group_std($group_id)
     $res = mysqli_query($conn, $sql);
     $row = mysqli_fetch_array($res);
     return $row["qty_std"];
+}
+function getNO($subject_id, $term, $people_id)
+{
+    global $conn;
+    $sqlNo = "select count(order_id) as getNo from order_books where subject_id = '$subject_id' and term = '$term' and people_id = '$people_id'";
+    $resNo = mysqli_query($conn, $sqlNo);
+    $NO = mysqli_fetch_array($resNo);
+    return $NO["getNo"] + 1;
 }

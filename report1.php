@@ -82,7 +82,7 @@ inner join book b on b.author_id = o.author_id and b.pub_id = o.pub_id and b.sub
 inner join people p on p.people_id = o.people_id
 inner join author a on a.author_id = o.author_id
 inner join publisher pu on pu.pub_id  = o.pub_id
-where o.people_id = '$people_ids' and o.status = '0' and o.term = '$terms' and o.subject_id = '$subject_id' and o.subject_name = '$subject_name' group by o.subject_id_book,b.name_book limit 3";
+where o.people_id = '$people_ids' and o.status = '0' and o.term = '$terms' and o.subject_id = '$subject_id' and o.subject_name = '$subject_name' group by o.subject_id_book,b.name_book,o.author_id,o.pub_id order by o.select_no limit 3";
     $resData = mysqli_query($conn, $sqlData);
     $resData2 = mysqli_query($conn, $sqlData);
     $rowData = mysqli_fetch_array($resData);
@@ -124,11 +124,11 @@ where o.people_id = '$people_ids' and o.status = '0' and o.term = '$terms' and o
         // mysqli_query($conn, $sqlUpstatus);
 
         while ($rowData2 = mysqli_fetch_array($resData2)) {
-            $subject_id_book = $rowData2["subject_id_book"];
-            $pub_id = $rowData2["pub_id"];
-            $author_id = $rowData2["author_id"];
-            $sqlUpdateNo = "update order_books set select_no = '$i' where people_id = '$people_ids' and status = '0' and term = '$terms' and subject_id = '$subject_id' and subject_id_book = '$subject_id_book' and author_id = '$author_id' and pub_id = '$pub_id'";
-            $resNo = mysqli_query($conn, $sqlUpdateNo);
+            // $subject_id_book = $rowData2["subject_id_book"];
+            // $pub_id = $rowData2["pub_id"];
+            // $author_id = $rowData2["author_id"];
+            // $sqlUpdateNo = "update order_books set select_no = '$i' where people_id = '$people_ids' and status = '0' and term = '$terms' and subject_id = '$subject_id' and subject_id_book = '$subject_id_book' and author_id = '$author_id' and pub_id = '$pub_id'";
+            // $resNo = mysqli_query($conn, $sqlUpdateNo);
         ?>
             <tr>
                 <td><?php echo $i; ?></td>
