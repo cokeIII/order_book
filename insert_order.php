@@ -72,5 +72,8 @@ function getNO($subject_id, $term, $people_id)
     $resNo = mysqli_query($conn, $sqlNo);
     $NO = mysqli_fetch_array($resNo);
     $noNum = mysqli_num_rows($resNo);
-    return $noNum + 1;
+    if($noNum == 0) {
+        $noNum = 1;
+    }
+    return $noNum;
 }
