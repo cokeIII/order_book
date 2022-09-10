@@ -25,6 +25,8 @@ while ($row = mysqli_fetch_assoc($res)) {
     subject_id="' . $row["subject_id"] . '"   
     author_id="' . $row["author_id"] . '" 
     pub_id="' . $row["pub_id"] . '" 
+    price="' . $row["price"] . '" 
+    qty_page="' . $row["qty_page"] . '" 
     class="btn btnOrder btn-success">
     <img title="จัดซื้อรายการนี้" src="img/shopping-bag.png" height="30" width="30">
     จัดซื้อ

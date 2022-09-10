@@ -40,7 +40,7 @@
     sg.level,
     sg.major_name
     from order_books o
-    inner join book b on b.author_id = o.author_id and b.pub_id = o.pub_id and b.subject_id = o.subject_id_book
+    inner join book b on b.author_id = o.author_id and b.pub_id = o.pub_id and b.subject_id = o.subject_id_book and o.price = b.price and o.qty_page = b.qty_page
     inner join people p on p.people_id = o.people_id
     inner join author a on a.author_id = o.author_id
     inner join publisher pu on pu.pub_id  = o.pub_id

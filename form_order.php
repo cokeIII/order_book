@@ -137,6 +137,8 @@
 <script>
     $(document).ready(function() {
         loadTable()
+        let price = 0;
+        let qty_page = 0;
         // $('#student_group_id').select2({
         //     theme: "bootstrap"
         // });
@@ -163,6 +165,8 @@
             subject_id_book = $(this).attr("subject_id")
             author_id = $(this).attr("author_id")
             pub_id = $(this).attr("pub_id")
+            price = $(this).attr("price")
+            qty_page = $(this).attr("qty_page")
             $.ajax({
                 type: "POST",
                 url: "get_subject.php",
@@ -211,6 +215,8 @@
                 'subject_id_book': subject_id_book,
                 'author_id': author_id,
                 'pub_id': pub_id,
+                'price' : price,
+                'qty_page' : qty_page,
                 student_group_id: $("#student_group_id").val(),
                 'people_id': <?php echo "'" . $_SESSION["people_id"] . "'";
                                 ?>,
