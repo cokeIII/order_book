@@ -25,6 +25,7 @@
     $people_id = $_SESSION["people_id"];
     $term = $_SESSION["term"];
     $sql = "select 
+    o.order_id,
     o.subject_id_book,
     o.subject_id,
     b.name_book,
