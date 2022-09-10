@@ -64,6 +64,7 @@
                             <th>ราคา</th>
                             <th>กลุ่มเรียน</th>
                             <th>จำนวนที่สั่งซื้อ</th>
+                            <th>รหัสการเลือก</th>
                             <th></th>
                         </tr>
                     </thead>
@@ -80,6 +81,7 @@
                                 <th><?php echo $row["price"]; ?></th>
                                 <th><?php echo $row["level"].'/'.$row["group_name"].' '.$row["major_name"];?></th>
                                 <th><?php echo $row["total"]; ?></th>
+                                <th><?php echo $row["order_id"]; ?></th>
                                 <th>
                                     <button subject_id_book="<?php echo $row["subject_id_book"]; ?>" author_id="<?php echo $row["author_id"]; ?>" pub_id="<?php echo $row["pub_id"]; ?>" people_id="<?php echo $people_id; ?>" student_group_id="<?php echo $row["student_group_id"]; ?>" class="btn btn-danger btnDel">
                                         <img src="img/delete.png" alt="" width="30" height="30">
