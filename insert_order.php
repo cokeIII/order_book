@@ -12,6 +12,8 @@ $subjectArr = explode(",", $subject);
 $subject_id = $subjectArr[0];
 $subject_name = $subjectArr[1];
 $note = $_POST["note"];
+$price = $_POST["price"];
+$qty_page = $_POST["qty_page"];
 $total = count_group_std($_POST["student_group_id"]);
 $dep_name = $_SESSION["dep_name"];
 if ($note == "อื่นๆ") {
@@ -32,7 +34,9 @@ $sql = "insert into order_books
         status,
         term,
         total,
-        dep_name
+        dep_name,
+        price,
+        qty_page
      ) value(
         '$subject_id',
         '$subject_name',
@@ -45,7 +49,9 @@ $sql = "insert into order_books
         '0',
         '$term',
         '$total',
-        '$dep_name'
+        '$dep_name',
+        '$price',
+        '$qty_page'
     )";
 
 $res = mysqli_query($conn, $sql);
