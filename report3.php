@@ -93,7 +93,7 @@ inner join people pe on pe.people_id = o.people_id
 inner join author a on a.author_id = o.author_id
 inner join publisher pu on pu.pub_id  = o.pub_id
 inner join book b on b.author_id = o.author_id and b.pub_id = o.pub_id and b.subject_id = o.subject_id_book
-where o.dep_name = '$dep_name' and o.term = '$term' and select_no = '1' and o.status = '1' group by b.name_book,o.author_id,o.pub_id
+where o.dep_name = '$dep_name' and o.term = '$term' and select_no = '1' and o.status = '1' group by b.name_book,o.author_id,o.pub_id,o.price,o.qty_page
 ";
 $res = mysqli_query($conn, $sql);
 ?>

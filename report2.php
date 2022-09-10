@@ -75,7 +75,7 @@ inner join book b on b.author_id = o.author_id and b.pub_id = o.pub_id and b.sub
 inner join people p on p.people_id = o.people_id
 inner join author a on a.author_id = o.author_id
 inner join publisher pu on pu.pub_id  = o.pub_id
-where o.people_id = '$people_ids' and o.status = '1' and o.term = '$terms' and o.subject_id = '$subject_id' and o.subject_name = '$subject_name' group by o.subject_id_book,o.author_id,o.pub_id,b.name_book,o.author_id,o.pub_id order by o.select_no limit 3";
+where o.people_id = '$people_ids' and o.status = '1' and o.term = '$terms' and o.subject_id = '$subject_id' and o.subject_name = '$subject_name' group by o.subject_id_book,o.author_id,o.pub_id,b.name_book,o.author_id,o.pub_id,o.price,o.qty_page order by o.select_no limit 3";
 $resData = mysqli_query($conn, $sqlData);
 $resData2 = mysqli_query($conn, $sqlData);
 $rowData = mysqli_fetch_array($resData);
