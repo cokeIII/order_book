@@ -75,9 +75,6 @@ while ($row = mysqli_fetch_array($res)) {
 
     $subject_id = $row["subject_id"];
     $subject_name = $row["subject_name"];
-    if () {
-
-    }
     $sqlData = "select 
 *,sum(o.total) as sumStd
 from order_books o
