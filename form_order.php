@@ -4,6 +4,19 @@
     .float-right-c {
         float: right;
     }
+
+    .modal-dialog {
+        width: 100%;
+        height: 80%;
+        margin: 0;
+        padding: 0;
+    }
+
+    .modal-content {
+        height: auto;
+        min-height: 100%;
+        border-radius: 0;
+    }
 </style>
 
 <head>
@@ -82,11 +95,22 @@
             <div class="modal-body">
                 <form id="insertOrder" method="post">
                     <div class="row">
-                        <div class="col-md-2 mt-1">
+                        <div class="col-md-3 mt-1">
+                            <label>ลำดับหนังสือที่เลือก</label>
+                            <select name="NOpick" id="NOpick" required class="form-control">
+                                <option value="">-</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                            </select>
+                        </div>
+                        <div class="col-md-3 mt-1">
                             <label>ภาคเรียน</label>
                             <input type="text" name="term" id="term" value="<?php echo $_SESSION["term"]; ?>" readonly class="form-control">
                         </div>
-                        <div class="col-md-4 mt-1">
+
+
+                        <div class="col-md-6 mt-1">
                             <div>
                                 <label>วิชา</label>
                             </div>
@@ -94,15 +118,17 @@
                                 <option value="">-- เลือกวิชา --</option>
                             </select>
                         </div>
-                        <div class="col-md-3 mt-1">
+                    </div>
+                    <div class="row">
+                        <div class="col-md-8 mt-1">
                             <div>
-                                <label>กลุ่มเรียน</label>
+                                <label>กลุ่มเรียน (เลือกได้หลายกลุ่มเรียน)</label>
                             </div>
-                            <select class="form-control" name="student_group_id" id="student_group_id" required>
+                            <select name="student_group_id[]" id="student_group_id" multiple="multiple" clas="h-100" required>
                                 <option value="">-- เลือกลุ่มเรียน --</option>
                             </select>
                         </div>
-                        <div class="col-md-3 mt-1">
+                        <div class="col-md-4 mt-1">
 
                             <label>หมายเหตุ</label>
                             <select class="form-control" name="note" id="note" required>
@@ -126,7 +152,7 @@
 
             <div class="modal-footer">
                 <div class="w-100 text-primary">
-                    <p class="float-left">* ถ้าค้นหาจากชื่อกลุ่มเรียนไม่เจอ ให้ค้นหาจารหัสกลุ่มเรียนแทน</p>
+                    <!-- <p class="float-left">* ถ้าค้นหาจากชื่อกลุ่มเรียนไม่เจอ ให้ค้นหาจารหัสกลุ่มเรียนแทน</p> -->
                 </div>
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
             </div>
@@ -194,8 +220,9 @@
                     $("#student_group_id").html(result)
                     $("#student_group_id").select2({
                         dropdownParent: $('#modal_group_id'),
-                        theme: "bootstrap",
+                        // theme: "bootstrap",
                         width: '100%'
+
                     })
                     $('#modal_group_id').modal('show')
                 }
@@ -215,8 +242,9 @@
                 'subject_id_book': subject_id_book,
                 'author_id': author_id,
                 'pub_id': pub_id,
-                'price' : price,
-                'qty_page' : qty_page,
+                'price': price,
+                'qty_page': qty_page,
+                'NOpick': $("#NOpick").val(),
                 student_group_id: $("#student_group_id").val(),
                 'people_id': <?php echo "'" . $_SESSION["people_id"] . "'";
                                 ?>,
