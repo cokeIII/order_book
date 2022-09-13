@@ -96,7 +96,7 @@
                 <form id="insertOrder" method="post">
                     <div class="row">
                         <div class="col-md-3 mt-1">
-                            <label>ลำดับหนังสือที่เลือก</label>
+                            <label>ลำดับหนังสือ(ลำดับใน สมอ.1)</label>
                             <select name="NOpick" id="NOpick" required class="form-control">
                                 <option value="">-</option>
                                 <option value="1">1</option>
